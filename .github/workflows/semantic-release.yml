@@ -16,8 +16,7 @@ permissions:
   contents: read           # for checkout
 
 jobs:
-  test-echo:
-    if: ${{ github.event_name == 'pull_request' && github.event.pull_request.merged }}
+  build-tests:
     runs-on: ubuntu-latest
     steps:
       - name: Debug
