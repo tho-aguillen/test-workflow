@@ -3,7 +3,9 @@ run-name: Semantic Release
 on:
   pull_request:
     types:
-      - closed
+      - opened
+      - synchronize
+      - reopened
     branches:
       - main
   push:
