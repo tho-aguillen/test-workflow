@@ -6,13 +6,26 @@ on:
       - closed
     branches:
       - main
+  push:
+    branches:
+      - main
 
 permissions:
   contents: read           # for checkout
 
 jobs:
+  test-echo:
+    if: ${{ !github.event_name == 'push' }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Debug
+        env:
+          MESSAGE: ${{ github.event_name }}
+        run: echo $MESSAGE
+
   release:
     name: Release
+    if: ${{ github.event_name == 'push' }}
     runs-on: ubuntu-latest
     permissions:
       contents: write      # to be able to publish a GitHub release
@@ -20,6 +33,11 @@ jobs:
       pull-requests: write # to be able to comment on released pull requests
       id-token: write      # to enable use of OIDC for npm provenance
     steps:
+      - name: Debug
+        env:
+          MESSAGE: ${{ github.event_name }}
+        run: echo $MESSAGE
+
       - name: Checkout
         uses: actions/checkout@v4
 
