@@ -15,7 +15,7 @@ permissions:
 
 jobs:
   test-echo:
-    if: ${{ !github.event_name == 'push' }}
+    if: ${{ github.event_name == 'pull_request' && github.event.pull_request.merged }}
     runs-on: ubuntu-latest
     steps:
       - name: Debug
