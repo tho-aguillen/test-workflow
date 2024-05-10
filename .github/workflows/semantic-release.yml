@@ -1,9 +1,11 @@
 name: semantic-release
 run-name: Semantic Release
 on:
-  push:
+  pull_request:
+    types:
+      - closed
     branches:
-    - main
+      - main
 
 permissions:
   contents: read           # for checkout
